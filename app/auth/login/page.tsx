@@ -3,17 +3,21 @@ import { useState } from "react"
 import { useAuth } from "@/context/AuthContext"
 import { useTheme } from "@/context/ThemeContext"
 
+import { useAuthStore } from "@/stores/useAuthStore"
+
 export default function Login() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(false)
-    const { login } = useAuth()
+    // const { login } = useAuth()
     const { theme } = useTheme()
+    const { login } = useAuthStore()
 
     async function handleLogin(e: React.FormEvent) {
         e.preventDefault()
         setLoading(true)
-        await login(email, password)
+        // await login(email, password)
+        await login(email, password) // login lewat zustand
         setLoading(false)
     }
 
