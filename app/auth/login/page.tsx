@@ -1,12 +1,14 @@
 'use client'
 import { useState } from "react"
 import { useAuth } from "@/context/AuthContext"
+import { useTheme } from "@/context/ThemeContext"
 
 export default function Login() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(false)
     const { login } = useAuth()
+    const { theme } = useTheme()
 
     async function handleLogin(e: React.FormEvent) {
         e.preventDefault()
@@ -16,7 +18,7 @@ export default function Login() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center">
+        <div className={`min-h-screen flex flex-col items-center justify-center ${theme === 'light' ? 'bg-white' : 'bg-slate-800'}`}>
             <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
                 <h1 className="text-3xl font-bold text-violet-700 mb-6 text-center">Login</h1>
                 <form onSubmit={handleLogin} className="space-y-4">
